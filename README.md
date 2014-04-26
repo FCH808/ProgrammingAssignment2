@@ -1,9 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 datasciencecoursera
 ===================
 
 Peer Assessment
 =======
+=======
+>>>>>>> 7f657dd22ac20d22698c53b23f0057e1a12c09b7
 ### Introduction
 
 This second programming assignment will require you to write an R
@@ -109,4 +112,7 @@ In order to complete this assignment, you must do the following:
 ### Grading
 
 This assignment will be graded via peer assessment.
+<<<<<<< HEAD
+>>>>>>> 7f657dd22ac20d22698c53b23f0057e1a12c09b7
+=======
 >>>>>>> 7f657dd22ac20d22698c53b23f0057e1a12c09b7

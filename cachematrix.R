@@ -13,6 +13,7 @@ makeCacheMatrix <- function(x = matrix()) {
 cacheSolve <- function(x, ...) {
         ## Return a matrix that is the inverse of 'x'
 }
+<<<<<<< HEAD
 makeVector <- function(x = numeric()) {
   m <- NULL
   set <- function(y) {
@@ -115,3 +116,5 @@ cacheSolve(a)
 a$getInverse()
 b = a$getInverse()
 a$get() %*% b 
+=======
+>>>>>>> 7f657dd22ac20d22698c53b23f0057e1a12c09b7
