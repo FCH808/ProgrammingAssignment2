@@ -106,15 +106,4 @@ cacheSolve(test2)
 test2$getInverse()
 
 
-a <- makeCacheMatrix(matrix(1:4,2))
-a$get()
-a$getInverse()
-a$set(matrix(5:8,2))
-a$get()
-cacheSolve(a)
-cacheSolve(a)
-a$getInverse()
-b = a$getInverse()
-a$get() %*% b 
-=======
->>>>>>> 7f657dd22ac20d22698c53b23f0057e1a12c09b7
+
