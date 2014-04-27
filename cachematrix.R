@@ -1,62 +1,4 @@
-## Put comments here that give an overall description of what your
-## functions do
-
-## Write a short comment describing this function
-
-makeCacheMatrix <- function(x = matrix()) {
-
-}
-
-
-## Write a short comment describing this function
-
-cacheSolve <- function(x, ...) {
-        ## Return a matrix that is the inverse of 'x'
-}
-<<<<<<< HEAD
-makeVector <- function(x = numeric()) {
-  m <- NULL
-  set <- function(y) {
-    x <<- y
-    m <<- NULL
-  }
-  get <- function() x
-  setmean <- function(mean) m <<- mean
-  getmean <- function() m
-  list(set = set, get = get,
-       setmean = setmean,
-       getmean = getmean)
-}
-
-v <- c(1,2,3,4,5,6)
-
-test<-makeVector(v)
-
-
-test$set(v)
-
-test$get()
-
-test$setmean()
-
-test$getmean()
-
-cachemean <- function(x, ...) {
-  m <- x$getmean()
-  if(!is.null(m)) {
-    message("getting cached data")
-    return(m)
-  }
-  data <- x$get()
-  m <- mean(data, ...)
-  x$setmean(m)
-  m
-}
-
-cachemean(test)
-
-test$getmean()
-
+## This function,  makeCacheMatrix, creates a "special" matrix object which is a list of functions that 1.) takes in and stores away a square matrix with the makeCache$set() function 2.) retrieves its stored square matrix with the makeCacheMatrix$get() 3.) uses makeCacheMatrix$setInverse() to set what is passed it as the inverse of the square matrix (this will be used within another function to set the inverse), and 4.) use makeCacheMatrix$getInverse() to retrieve the stored square matrix inverse. These values are set in a parent environment above the functions current environment with the <<- operator so they can be retrieved later.
 
 ####################################
 makeCacheMatrix <- function(x = matrix()) {
@@ -73,18 +15,25 @@ makeCacheMatrix <- function(x = matrix()) {
        getInverse = getInverse)
 }
 
-M <- matrix(5:8,2)
 
-test2<-makeCacheMatrix(M)
-solve(M)
+## Create a "special" matrix object called CachedMatrixObject
+cachedMatrixObject<-makeCacheMatrix()
 
-test2$set(M)
+## Pass a matrix into the sub-function $set to store this matrix as its matrix.
+cachedMatrixObject$set(  matrix(5:8,2) )
 
-test2$get()
+## Retrieve the stored matrix with the subfunction $get.
+cachedMatrixObject$get()
 
-test2$setInverse()
+## $setInverse needs a matrix passed to it to work. Here it throws back an error letting us know nothing has been passed to it.
+cachedMatrixObject$setInverse()
 
-test2$getInverse()
+## $getInverse shows there is currently nothing in the "special" matrix object.
+cachedMatrixObject$getInverse()
+
+
+
+## Here we will create a function named cacheSolve which will take in a "special" matrix object, and return its inverse. If the inverse has already been calculated, it will simply pull this inverse from the "special" matrix object by using its $getInverse subfunction and let the user know by printing "getting cached data" to the console. If the inverse has not been calculated yet, it will use the "special" matrix object $get subfunction to grab the "special" matrix object, solve the inverse, and store this solved matrix away by passing this solution to the "special" matrix object's $setInverse subfunction.
 
 
 cacheSolve <- function(x, ...) {
@@ -100,10 +49,20 @@ cacheSolve <- function(x, ...) {
 }
 
 
+## cacheSolve is a function which takes in a "special" matrix object and either 1.) solves the inverse and sets it in the "special" matrix object, or 2.) if the inverse has already been solved previously, simply returns the stored away solution without needing to solve it again. The "special" matrix object stores this away in a parent enviroment as defined earlier with the <<- operator so that it can be set from within another function, such as in this case.
 
-cacheSolve(test2)
+cacheSolve(cachedMatrixObject)
 
-test2$getInverse()
+## The inverse is now stored in the "special" matrix object, and can be retrieved with its $getInverse function.
+cachedMatrixObject$getInverse()
 
+## Pass the same "special" matrix object to the cacheSolve function again will check for and find the solution already stored away, and simply return this with the "special" matrix object's $getInverse subfunction. "getting cached data" is displayed to show this occurred. 
+cacheSolve(cachedMatrixObject)
 
+##New matrices can be $set, retrieved $get, and/or solved $setInverse/$getInverse with the "special" matrix object that was created..
 
+cachedMatrixObject$set(matrix(1:4,2))
+cachedMatrixObject$get()
+cacheSolve(cachedMatrixObject)
+cachedMatrixObject$getInverse()
+cacheSolve(cachedMatrixObject)
